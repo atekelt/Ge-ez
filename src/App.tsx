@@ -136,30 +136,8 @@ export default function App() {
       starsTotal={progress.starsTotal}
       streakDays={progress.streakDays}
     >
-      {/* Top Banner with App Brand inside Phone Display */}
-      <div className="bg-[#2D6A2F] text-white px-4 py-2.5 flex items-center justify-between shrink-0 shadow-sm">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-[#F4E4C1] text-[#2D6A2F] flex items-center justify-center font-ethiopic font-bold text-lg shadow-xs">
-            ፯
-          </div>
-          <div>
-            <h1 className="font-display font-bold text-sm leading-tight text-white">
-              Ge'ez Numeral Match
-            </h1>
-            <p className="text-[10px] text-white/80 font-medium">
-              Additive System · Ages 6–8
-            </p>
-          </div>
-        </div>
-
-        {/* Small badge */}
-        <div className="bg-white/15 px-2 py-0.5 rounded-full text-[10px] font-mono-custom text-white font-semibold">
-          Offline
-        </div>
-      </div>
-
       {/* Screen Body */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-y-auto">
         {currentTab === 'level1' && (
           <LevelOneMatch
             onRoundComplete={handleLevel1Complete}
@@ -193,8 +171,8 @@ export default function App() {
         {currentTab === 'chart' && <NumeralChart />}
       </div>
 
-      {/* Android Bottom Navigation Tabs */}
-      <nav className="bg-white border-t border-[#DDD3C2] px-2 py-1.5 flex items-center justify-around shrink-0 z-10 shadow-xs">
+      {/* Responsive Bottom Navigation Tabs */}
+      <nav className="sticky bottom-0 z-20 bg-white/95 backdrop-blur-md border-t border-[#DDD3C2] px-2 sm:px-4 md:px-6 py-1 sm:py-2 flex items-center justify-around shrink-0 shadow-sm">
         {navItems.map((item) => {
           const isActive = currentTab === item.id;
           return (
@@ -204,23 +182,23 @@ export default function App() {
                 soundManager.playTap();
                 setCurrentTab(item.id);
               }}
-              className={`flex-1 py-1 px-1 rounded-xl flex flex-col items-center justify-center transition-all cursor-pointer ${
+              className={`flex-1 py-1.5 sm:py-2 px-1 sm:px-2.5 min-h-[50px] sm:min-h-[58px] rounded-xl sm:rounded-2xl flex flex-col items-center justify-center transition-all cursor-pointer ${
                 isActive
-                  ? 'bg-[#E7EEE1] text-[#1E4A20]'
+                  ? 'bg-[#E7EEE1] text-[#1E4A20] font-bold shadow-xs'
                   : 'text-[#6B6459] hover:bg-[#FAF6EF]'
               }`}
             >
               <span
-                className={`font-ethiopic text-base font-bold leading-none mb-0.5 ${
+                className={`font-ethiopic text-lg sm:text-2xl font-bold leading-none mb-0.5 ${
                   isActive ? 'text-[#2D6A2F] scale-110' : 'text-[#6B6459]'
                 }`}
               >
                 {item.geezIcon}
               </span>
-              <span className="text-[10px] font-bold leading-tight font-display">
+              <span className="text-[11px] sm:text-xs md:text-sm font-bold leading-tight font-display">
                 {item.label}
               </span>
-              <span className="text-[9px] text-[#6B6459] font-mono-custom leading-none">
+              <span className="text-[9px] sm:text-[10px] text-[#6B6459] font-mono-custom leading-none mt-0.5">
                 {item.sub}
               </span>
             </button>

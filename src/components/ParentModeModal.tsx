@@ -49,23 +49,23 @@ export const ParentModeModal: React.FC<ParentModeModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
-      <div className="bg-[#FDF8F2] w-full max-w-md rounded-3xl border-2 border-[#DDD3C2] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div className="bg-[#FDF8F2] w-full max-w-md sm:max-w-lg md:max-w-xl rounded-3xl border-2 border-[#DDD3C2] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Modal Top Header */}
-        <div className="bg-[#1E4A20] text-white px-5 py-3.5 flex items-center justify-between">
+        <div className="bg-[#1E4A20] text-white px-5 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <ShieldCheck size={18} className="text-[#C8961E]" />
-            <span className="font-display font-bold text-sm">Parent & Educator Zone</span>
+            <ShieldCheck size={18} className="text-[#C8961E] sm:w-5 sm:h-5" />
+            <span className="font-display font-bold text-sm sm:text-base">Parent & Educator Zone</span>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-full hover:bg-white/10 text-white/80 transition-colors"
+            className="p-1 rounded-full hover:bg-white/10 text-white/80 transition-colors cursor-pointer"
           >
-            <X size={18} />
+            <X size={18} className="sm:w-5 sm:h-5" />
           </button>
         </div>
 
         {/* Inner Content */}
-        <div className="p-5 overflow-y-auto space-y-4">
+        <div className="p-5 sm:p-6 overflow-y-auto space-y-4 sm:space-y-6">
           {!isUnlocked ? (
             /* Adult Gate */
             <form onSubmit={handleUnlock} className="space-y-3 text-center py-4">

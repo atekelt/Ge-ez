@@ -63,21 +63,21 @@ export const NumeralChart: React.FC = () => {
         </div>
 
         {/* Selected Highlight Card */}
-        <div className="bg-white border-2 border-[#DDD3C2] rounded-2xl p-3 shadow-xs flex items-center justify-between mb-2.5">
-          <div className="flex items-center gap-3">
-            <span className="font-ethiopic text-5xl font-bold text-[#2D6A2F] leading-none">
+        <div className="bg-white border-2 border-[#DDD3C2] rounded-2xl p-3 sm:p-5 shadow-xs flex items-center justify-between mb-2.5 sm:mb-4">
+          <div className="flex items-center gap-3 sm:gap-5">
+            <span className="font-ethiopic text-5xl sm:text-6xl md:text-7xl font-bold text-[#2D6A2F] leading-none">
               {selectedNumeral.geez}
             </span>
             <div>
-              <div className="flex items-center gap-1.5">
-                <h4 className="font-display font-bold text-base text-[#1E4A20]">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <h4 className="font-display font-bold text-base sm:text-xl text-[#1E4A20]">
                   {selectedNumeral.arabic}
                 </h4>
-                <span className="text-xs font-semibold text-[#B85C38]">
+                <span className="text-xs sm:text-sm font-semibold text-[#B85C38]">
                   "{selectedNumeral.englishTranslit}"
                 </span>
               </div>
-              <p className="text-xs text-[#6B6459] font-medium">
+              <p className="text-xs sm:text-sm text-[#6B6459] font-medium mt-0.5">
                 Amharic: <strong className="text-[#1A1A1A]">{selectedNumeral.amharicName}</strong>
               </p>
             </div>
@@ -88,34 +88,34 @@ export const NumeralChart: React.FC = () => {
               soundManager.playTap();
               soundManager.speakAmharic(selectedNumeral.amharicName);
             }}
-            className="px-2.5 py-1.5 rounded-xl bg-[#FAF6EF] hover:bg-[#F4E4C1] active:scale-95 text-[#8B3E23] border border-[#DDD3C2] flex items-center gap-1.5 cursor-pointer shadow-xs transition-colors"
+            className="px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-[#FAF6EF] hover:bg-[#F4E4C1] active:scale-95 text-[#8B3E23] border border-[#DDD3C2] flex items-center gap-1.5 cursor-pointer shadow-xs transition-colors"
             title="Click listen icon to hear Amharic number"
           >
-            <Volume2 size={16} className="text-[#C8961E]" />
-            <span className="text-xs font-bold">Listen</span>
+            <Volume2 size={16} className="text-[#C8961E] sm:w-5 sm:h-5" />
+            <span className="text-xs sm:text-sm font-bold">Listen</span>
           </button>
         </div>
       </div>
 
       {/* Grid of All Numerals (Scrollable) */}
       <div className="flex-1 overflow-y-auto pr-1">
-        <div className="grid grid-cols-4 sm:grid-cols-5 gap-1.5 pb-2">
+        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 lg:grid-cols-10 gap-1.5 sm:gap-2 md:gap-2.5 pb-2 sm:pb-4">
           {displayList.map((item) => {
             const isSelected = selectedNumeral.arabic === item.arabic;
             return (
               <button
                 key={item.arabic}
                 onClick={() => handleNumeralTap(item)}
-                className={`p-2 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
+                className={`p-2 sm:p-3 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
                   isSelected
                     ? 'bg-[#2D6A2F] text-white border-[#1E4A20] shadow-sm scale-105 ring-2 ring-[#C8961E]'
                     : 'bg-white border-[#DDD3C2] text-[#1E4A20] hover:border-[#2D6A2F]'
                 }`}
               >
-                <span className="font-ethiopic text-2xl font-bold leading-tight">
+                <span className="font-ethiopic text-2xl sm:text-3xl font-bold leading-tight">
                   {item.geez}
                 </span>
-                <span className={`text-[10px] font-mono-custom ${isSelected ? 'text-white/90' : 'text-[#6B6459]'}`}>
+                <span className={`text-[10px] sm:text-xs font-mono-custom ${isSelected ? 'text-white/90' : 'text-[#6B6459]'}`}>
                   {item.arabic}
                 </span>
               </button>
@@ -124,7 +124,7 @@ export const NumeralChart: React.FC = () => {
         </div>
 
         {/* Live Interactive Compound Sandbox */}
-        <div className="bg-[#FAF6EF] border border-[#DDD3C2] rounded-2xl p-3 mt-1 shadow-xs">
+        <div className="bg-[#FAF6EF] border border-[#DDD3C2] rounded-2xl p-3 sm:p-5 mt-1 sm:mt-3 shadow-xs">
           <div className="text-xs font-bold text-[#1E4A20] mb-2 flex items-center justify-between">
             <span className="flex items-center gap-1">
               <Sparkles size={13} className="text-[#C8961E]" />

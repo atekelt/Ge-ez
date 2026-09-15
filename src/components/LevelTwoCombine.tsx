@@ -232,7 +232,7 @@ export const LevelTwoCombine: React.FC<LevelTwoCombineProps> = ({
   }
 
   return (
-    <div className="flex-1 flex flex-col justify-between p-3.5 sm:p-4 bg-[#FDF8F2]">
+    <div className="flex-1 flex flex-col justify-between p-3 sm:p-4 bg-[#FDF8F2] overflow-y-auto">
       {/* Header & Submode Toggle */}
       <div>
         <div className="flex items-center justify-between mb-2">
@@ -319,10 +319,10 @@ export const LevelTwoCombine: React.FC<LevelTwoCombineProps> = ({
             </div>
 
             {/* Fusion Stage: [Tens] + [Units] = [Compound] */}
-            <div className="flex items-center justify-center gap-2 my-1">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 my-1 sm:my-3">
               {/* Tens slot */}
               <div
-                className={`w-16 h-16 rounded-xl border-2 flex flex-col items-center justify-center transition-all ${
+                className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl sm:rounded-2xl border-2 flex flex-col items-center justify-center transition-all ${
                   selectedTens !== null
                     ? 'bg-[#E7EEE1] border-[#2D6A2F] text-[#2D6A2F]'
                     : 'bg-[#FDF8F2] border-dashed border-[#DDD3C2] text-gray-400'
@@ -330,22 +330,22 @@ export const LevelTwoCombine: React.FC<LevelTwoCombineProps> = ({
               >
                 {selectedTens !== null ? (
                   <>
-                    <span className="font-ethiopic text-2xl font-bold">
+                    <span className="font-ethiopic text-2xl sm:text-3xl md:text-4xl font-bold">
                       {GEEZ_TENS.find(t => t.arabic === selectedTens)?.geez}
                     </span>
-                    <span className="text-[10px] font-mono-custom text-[#6B6459]">{selectedTens}</span>
+                    <span className="text-[10px] sm:text-xs font-mono-custom text-[#6B6459]">{selectedTens}</span>
                   </>
                 ) : (
-                  <span className="text-[10px] font-semibold text-center text-[#6B6459]">Pick Tens</span>
+                  <span className="text-[10px] sm:text-xs font-semibold text-center text-[#6B6459]">Pick Tens</span>
                 )}
               </div>
 
               {/* Plus operator */}
-              <Plus size={16} className="text-[#C8961E] shrink-0" />
+              <Plus size={18} className="text-[#C8961E] shrink-0 sm:w-6 sm:h-6" />
 
               {/* Units slot */}
               <div
-                className={`w-16 h-16 rounded-xl border-2 flex flex-col items-center justify-center transition-all ${
+                className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl sm:rounded-2xl border-2 flex flex-col items-center justify-center transition-all ${
                   selectedUnits !== null
                     ? 'bg-[#F3DCCF] border-[#B85C38] text-[#B85C38]'
                     : 'bg-[#FDF8F2] border-dashed border-[#DDD3C2] text-gray-400'
@@ -353,22 +353,22 @@ export const LevelTwoCombine: React.FC<LevelTwoCombineProps> = ({
               >
                 {selectedUnits !== null ? (
                   <>
-                    <span className="font-ethiopic text-2xl font-bold">
+                    <span className="font-ethiopic text-2xl sm:text-3xl md:text-4xl font-bold">
                       {GEEZ_UNITS.find(u => u.arabic === selectedUnits)?.geez}
                     </span>
-                    <span className="text-[10px] font-mono-custom text-[#6B6459]">{selectedUnits}</span>
+                    <span className="text-[10px] sm:text-xs font-mono-custom text-[#6B6459]">{selectedUnits}</span>
                   </>
                 ) : (
-                  <span className="text-[10px] font-semibold text-center text-[#6B6459]">Pick Units</span>
+                  <span className="text-[10px] sm:text-xs font-semibold text-center text-[#6B6459]">Pick Units</span>
                 )}
               </div>
 
               {/* Equals */}
-              <span className="font-bold text-base text-[#1A1A1A] shrink-0">=</span>
+              <span className="font-bold text-base sm:text-xl md:text-2xl text-[#1A1A1A] shrink-0">=</span>
 
               {/* Result combined preview */}
               <div
-                className={`min-w-16 h-16 px-2 rounded-xl border-2 flex flex-col items-center justify-center transition-all ${
+                className={`min-w-16 sm:min-w-20 md:min-w-24 h-16 sm:h-20 md:h-24 px-2 sm:px-3 rounded-xl sm:rounded-2xl border-2 flex flex-col items-center justify-center transition-all ${
                   isCombined
                     ? 'bg-[#2D6A2F] text-white border-[#1E4A20] scale-105 shadow-md'
                     : 'bg-white border-[#DDD3C2] text-[#1A1A1A]'
@@ -376,101 +376,101 @@ export const LevelTwoCombine: React.FC<LevelTwoCombineProps> = ({
               >
                 {isCombined ? (
                   <>
-                    <span className="font-ethiopic text-3xl font-bold text-white">
+                    <span className="font-ethiopic text-3xl sm:text-4xl md:text-5xl font-bold text-white">
                       {targetCompound.fullGeez}
                     </span>
-                    <span className="text-[9px] font-medium text-white/90">
+                    <span className="text-[9px] sm:text-xs font-medium text-white/90">
                       {targetCompound.amharicName}
                     </span>
                   </>
                 ) : (
-                  <span className="text-[10px] text-gray-400 font-medium">Result</span>
+                  <span className="text-[10px] sm:text-xs text-gray-400 font-medium">Result</span>
                 )}
               </div>
             </div>
 
-            <div className="text-[11px] text-center text-[#6B6459] mt-1 font-mono-custom">
+            <div className="text-[11px] sm:text-xs text-center text-[#6B6459] mt-1 sm:mt-2 font-mono-custom">
               Additive formula: {targetCompound.tens} + {targetCompound.units} = {targetCompound.arabic}
             </div>
           </div>
 
-          {/* Selection Trays */}
-          <div className="space-y-2">
+          {/* Selection Trays: Stacked on mobile, side-by-side on tablet/desktop */}
+          <div className="space-y-2.5 md:space-y-0 md:grid md:grid-cols-2 md:gap-4">
             {/* Step 1: Tens Tray */}
-            <div>
-              <div className="text-[11px] font-bold text-[#2D6A2F] mb-1 flex items-center justify-between">
+            <div className="bg-white/70 border border-[#DDD3C2] rounded-2xl p-2.5 sm:p-3">
+              <div className="text-[11px] sm:text-xs font-bold text-[#2D6A2F] mb-1.5 flex items-center justify-between">
                 <span>1. Select Tens ({targetCompound.tens})</span>
                 <span className="text-[10px] text-[#6B6459] font-normal">፲=10, ፳=20, ፴=30...</span>
               </div>
-              <div className="grid grid-cols-5 gap-1.5">
+              <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
                 {GEEZ_TENS.filter(t => t.arabic < 100).slice(0, 5).map(t => (
                   <button
                     key={t.arabic}
                     onClick={() => handlePickTens(t.arabic)}
-                    className={`p-1.5 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
+                    className={`p-1.5 sm:p-2 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
                       selectedTens === t.arabic
                         ? 'bg-[#2D6A2F] text-white border-[#1E4A20] shadow-sm scale-105'
                         : 'bg-white border-[#DDD3C2] text-[#1E4A20] hover:border-[#2D6A2F]'
                     }`}
                   >
-                    <span className="font-ethiopic text-xl font-bold leading-tight">{t.geez}</span>
-                    <span className="text-[10px] font-mono-custom">{t.arabic}</span>
+                    <span className="font-ethiopic text-xl sm:text-2xl font-bold leading-tight">{t.geez}</span>
+                    <span className="text-[10px] sm:text-xs font-mono-custom">{t.arabic}</span>
                   </button>
                 ))}
               </div>
-              <div className="grid grid-cols-4 gap-1.5 mt-1">
+              <div className="grid grid-cols-4 gap-1.5 sm:gap-2 mt-1.5">
                 {GEEZ_TENS.filter(t => t.arabic < 100).slice(5).map(t => (
                   <button
                     key={t.arabic}
                     onClick={() => handlePickTens(t.arabic)}
-                    className={`p-1.5 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
+                    className={`p-1.5 sm:p-2 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
                       selectedTens === t.arabic
                         ? 'bg-[#2D6A2F] text-white border-[#1E4A20] shadow-sm scale-105'
                         : 'bg-white border-[#DDD3C2] text-[#1E4A20] hover:border-[#2D6A2F]'
                     }`}
                   >
-                    <span className="font-ethiopic text-xl font-bold leading-tight">{t.geez}</span>
-                    <span className="text-[10px] font-mono-custom">{t.arabic}</span>
+                    <span className="font-ethiopic text-xl sm:text-2xl font-bold leading-tight">{t.geez}</span>
+                    <span className="text-[10px] sm:text-xs font-mono-custom">{t.arabic}</span>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Step 2: Units Tray */}
-            <div>
-              <div className="text-[11px] font-bold text-[#B85C38] mb-1 flex items-center justify-between">
+            <div className="bg-white/70 border border-[#DDD3C2] rounded-2xl p-2.5 sm:p-3">
+              <div className="text-[11px] sm:text-xs font-bold text-[#B85C38] mb-1.5 flex items-center justify-between">
                 <span>2. Select Units ({targetCompound.units})</span>
                 <span className="text-[10px] text-[#6B6459] font-normal">፩=1, ፪=2, ፫=3...</span>
               </div>
-              <div className="grid grid-cols-5 gap-1.5">
+              <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
                 {GEEZ_UNITS.slice(0, 5).map(u => (
                   <button
                     key={u.arabic}
                     onClick={() => handlePickUnits(u.arabic)}
-                    className={`p-1.5 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
+                    className={`p-1.5 sm:p-2 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
                       selectedUnits === u.arabic
                         ? 'bg-[#B85C38] text-white border-[#8B3E23] shadow-sm scale-105'
                         : 'bg-white border-[#DDD3C2] text-[#B85C38] hover:border-[#B85C38]'
                     }`}
                   >
-                    <span className="font-ethiopic text-xl font-bold leading-tight">{u.geez}</span>
-                    <span className="text-[10px] font-mono-custom">{u.arabic}</span>
+                    <span className="font-ethiopic text-xl sm:text-2xl font-bold leading-tight">{u.geez}</span>
+                    <span className="text-[10px] sm:text-xs font-mono-custom">{u.arabic}</span>
                   </button>
                 ))}
               </div>
-              <div className="grid grid-cols-4 gap-1.5 mt-1">
+              <div className="grid grid-cols-4 gap-1.5 sm:gap-2 mt-1.5">
                 {GEEZ_UNITS.slice(5, 9).map(u => (
                   <button
                     key={u.arabic}
                     onClick={() => handlePickUnits(u.arabic)}
-                    className={`p-1.5 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
+                    className={`p-1.5 sm:p-2 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
                       selectedUnits === u.arabic
                         ? 'bg-[#B85C38] text-white border-[#8B3E23] shadow-sm scale-105'
                         : 'bg-white border-[#DDD3C2] text-[#B85C38] hover:border-[#B85C38]'
                     }`}
                   >
-                    <span className="font-ethiopic text-xl font-bold leading-tight">{u.geez}</span>
-                    <span className="text-[10px] font-mono-custom">{u.arabic}</span>
+                    <span className="font-ethiopic text-xl sm:text-2xl font-bold leading-tight">{u.geez}</span>
+                    <span className="text-[10px] sm:text-xs font-mono-custom">{u.arabic}</span>
                   </button>
                 ))}
               </div>
@@ -479,33 +479,33 @@ export const LevelTwoCombine: React.FC<LevelTwoCombineProps> = ({
         </div>
       ) : (
         /* SUB-MODE 2: COMPOUND IDENTIFIER QUIZ */
-        <div className="flex-1 flex flex-col justify-between py-2">
+        <div className="flex-1 flex flex-col justify-between py-2 sm:py-6">
           <div className="my-auto text-center flex flex-col items-center">
-            <div className="w-full max-w-xs bg-white border-2 border-[#DDD3C2] rounded-3xl p-5 shadow-sm mb-4">
-              <span className="text-xs font-semibold text-[#6B6459]">Combined Ge'ez Numeral:</span>
-              <div className="font-ethiopic text-6xl text-[#2D6A2F] font-bold my-2 tracking-wider">
+            <div className="w-full max-w-xs sm:max-w-md md:max-w-lg bg-white border-2 border-[#DDD3C2] rounded-3xl p-5 sm:p-8 shadow-sm mb-4">
+              <span className="text-xs sm:text-sm font-semibold text-[#6B6459]">Combined Ge'ez Numeral:</span>
+              <div className="font-ethiopic text-6xl sm:text-7xl md:text-8xl text-[#2D6A2F] font-bold my-2 sm:my-4 tracking-wider">
                 {targetCompound.fullGeez}
               </div>
 
               {/* Visual Breakdown Hint */}
-              <div className="inline-flex items-center gap-1.5 bg-[#FAF6EF] px-3 py-1 rounded-full border border-[#DDD3C2] text-xs font-semibold text-[#6B6459]">
+              <div className="inline-flex items-center gap-1.5 bg-[#FAF6EF] px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-[#DDD3C2] text-xs sm:text-sm font-semibold text-[#6B6459]">
                 <span>{targetCompound.tensGeez} ({targetCompound.tens})</span>
                 <span>+</span>
                 <span>{targetCompound.unitsGeez} ({targetCompound.units})</span>
               </div>
 
               {/* Explicit Listen Button */}
-              <div className="mt-3">
+              <div className="mt-3 sm:mt-4">
                 <button
                   type="button"
                   onClick={() => {
                     soundManager.playTap();
                     soundManager.speakAmharic(targetCompound.amharicName);
                   }}
-                  className="inline-flex items-center gap-1.5 bg-[#FAF6EF] hover:bg-[#F4E4C1] active:scale-95 text-[#1E4A20] px-3 py-1 rounded-full text-xs font-bold border border-[#DDD3C2] cursor-pointer shadow-xs transition-colors"
+                  className="inline-flex items-center gap-1.5 bg-[#FAF6EF] hover:bg-[#F4E4C1] active:scale-95 text-[#1E4A20] px-3.5 sm:px-5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold border border-[#DDD3C2] cursor-pointer shadow-xs transition-colors"
                   title="Click listen icon to hear Amharic number"
                 >
-                  <Volume2 size={13} className="text-[#C8961E]" />
+                  <Volume2 size={14} className="text-[#C8961E]" />
                   <span>Listen · {targetCompound.amharicName}</span>
                 </button>
               </div>
@@ -513,10 +513,10 @@ export const LevelTwoCombine: React.FC<LevelTwoCombineProps> = ({
           </div>
 
           <div>
-            <div className="text-center text-xs font-semibold text-[#6B6459] mb-2">
+            <div className="text-center text-xs sm:text-sm font-semibold text-[#6B6459] mb-2 sm:mb-3">
               What number is represented above?
             </div>
-            <div className="grid grid-cols-3 gap-2.5 max-w-xs mx-auto">
+            <div className="grid grid-cols-3 gap-2.5 sm:gap-4 max-w-xs sm:max-w-md md:max-w-lg mx-auto">
               {identifyChoices.map((choiceVal) => {
                 const isSelected = identifySelected === choiceVal;
                 const isCorrect = choiceVal === targetCompound.arabic;
@@ -537,7 +537,7 @@ export const LevelTwoCombine: React.FC<LevelTwoCombineProps> = ({
                     key={choiceVal}
                     onClick={() => handleIdentifyChoice(choiceVal)}
                     disabled={identifySelected !== null}
-                    className={`h-16 rounded-2xl flex items-center justify-center font-display text-2xl font-bold transition-all cursor-pointer ${btnStyles}`}
+                    className={`h-16 sm:h-20 md:h-24 rounded-2xl flex items-center justify-center font-display text-2xl sm:text-3xl md:text-4xl font-bold transition-all cursor-pointer ${btnStyles}`}
                   >
                     {choiceVal}
                   </button>

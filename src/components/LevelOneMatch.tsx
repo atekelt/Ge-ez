@@ -170,7 +170,7 @@ export const LevelOneMatch: React.FC<LevelOneMatchProps> = ({
   }
 
   return (
-    <div className="flex-1 flex flex-col justify-between p-4 bg-[#FDF8F2]">
+    <div className="flex-1 flex flex-col justify-between p-3.5 sm:p-4 bg-[#FDF8F2] overflow-y-auto">
       {/* Header with Level tag and Progress indicator */}
       <div>
         <div className="flex items-center justify-between mb-2">
@@ -240,9 +240,9 @@ export const LevelOneMatch: React.FC<LevelOneMatchProps> = ({
       </div>
 
       {/* Main Numeral Stage */}
-      <div className="my-auto py-3 flex flex-col items-center justify-center">
+      <div className="my-auto py-3 sm:py-6 flex flex-col items-center justify-center">
         <div
-          className={`relative group w-36 h-36 sm:w-40 sm:h-40 rounded-3xl flex flex-col items-center justify-center transition-all duration-300 shadow-md ${
+          className={`relative group w-36 h-36 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-3xl flex flex-col items-center justify-center transition-all duration-300 shadow-md ${
             isCorrect === true
               ? 'bg-[#E4F0E1] border-3 border-[#2D6A2F] scale-105 ring-4 ring-[#2D6A2F]/20'
               : isCorrect === false
@@ -251,7 +251,7 @@ export const LevelOneMatch: React.FC<LevelOneMatchProps> = ({
           }`}
         >
           {/* Big Ethiopic Numeral */}
-          <span className="font-ethiopic text-7xl sm:text-8xl text-[#2D6A2F] font-bold select-none leading-none drop-shadow-xs">
+          <span className="font-ethiopic text-7xl sm:text-8xl md:text-9xl text-[#2D6A2F] font-bold select-none leading-none drop-shadow-xs">
             {currentNumeral.geez}
           </span>
 
@@ -259,28 +259,28 @@ export const LevelOneMatch: React.FC<LevelOneMatchProps> = ({
           <button
             type="button"
             onClick={handlePronounce}
-            className="mt-2 flex items-center gap-1.5 bg-[#FAF6EF] hover:bg-[#F4E4C1] active:scale-95 px-3 py-1 rounded-full border border-[#DDD3C2] text-xs font-bold text-[#1E4A20] shadow-xs cursor-pointer transition-colors"
+            className="mt-2 sm:mt-3 flex items-center gap-1.5 bg-[#FAF6EF] hover:bg-[#F4E4C1] active:scale-95 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-[#DDD3C2] text-xs sm:text-sm font-bold text-[#1E4A20] shadow-xs cursor-pointer transition-colors"
             title="Click listen icon to hear Amharic number"
           >
-            <Volume2 size={13} className="text-[#C8961E]" />
+            <Volume2 size={14} className="text-[#C8961E]" />
             <span>Listen · {currentNumeral.amharicName}</span>
           </button>
 
           {isCorrect === true && (
-            <div className="absolute -top-2 -right-2 bg-[#C8961E] text-white p-1 rounded-full shadow-md animate-bounce">
-              <Sparkles size={16} />
+            <div className="absolute -top-2 -right-2 bg-[#C8961E] text-white p-1 sm:p-1.5 rounded-full shadow-md animate-bounce">
+              <Sparkles size={18} />
             </div>
           )}
         </div>
       </div>
 
       {/* 3 Large Choice Cards (At least 44px+ touch target) */}
-      <div className="pb-1">
-        <div className="text-center text-xs font-semibold text-[#6B6459] mb-2.5">
+      <div className="pb-1 sm:pb-4">
+        <div className="text-center text-xs sm:text-sm font-semibold text-[#6B6459] mb-2.5 sm:mb-3.5">
           Tap the matching {displayMode === 'arabic' ? 'number' : 'count'}:
         </div>
 
-        <div className="grid grid-cols-3 gap-2.5 max-w-xs mx-auto">
+        <div className="grid grid-cols-3 gap-2.5 sm:gap-4 max-w-xs sm:max-w-md md:max-w-lg mx-auto">
           {options.map((optionNum) => {
             const isThisSelected = selectedAnswer === optionNum;
             const isThisCorrect = optionNum === currentNumeral.arabic;
@@ -301,7 +301,7 @@ export const LevelOneMatch: React.FC<LevelOneMatchProps> = ({
                 key={optionNum}
                 onClick={() => handleSelectOption(optionNum)}
                 disabled={selectedAnswer !== null}
-                className={`h-20 min-h-[56px] rounded-2xl flex flex-col items-center justify-center font-display font-bold text-2xl transition-all cursor-pointer ${cardStyles}`}
+                className={`h-20 sm:h-24 md:h-28 min-h-[56px] rounded-2xl flex flex-col items-center justify-center font-display font-bold text-2xl sm:text-3xl md:text-4xl transition-all cursor-pointer ${cardStyles}`}
               >
                 {displayMode === 'arabic' ? (
                   <span>{optionNum}</span>
@@ -313,7 +313,7 @@ export const LevelOneMatch: React.FC<LevelOneMatchProps> = ({
           })}
         </div>
 
-        <p className="text-[10px] text-center text-[#6B6459] mt-3">
+        <p className="text-[10px] sm:text-xs text-center text-[#6B6459] mt-3 sm:mt-4">
           Recognition only · no complex stroke tracing required
         </p>
       </div>

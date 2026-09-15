@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Smartphone, Monitor, Volume2, VolumeX, ShieldCheck, Award } from 'lucide-react';
+import React, { useState } from 'react';
+import { Volume2, VolumeX, ShieldCheck, Award } from 'lucide-react';
 import { soundManager } from '../utils/audio';
 
 interface AndroidFrameProps {
@@ -12,27 +12,11 @@ interface AndroidFrameProps {
 
 export const AndroidFrame: React.FC<AndroidFrameProps> = ({
   children,
-  activeLevelTitle = "Ge'ez Numeral Match",
   onOpenParentMode,
   starsTotal,
   streakDays,
 }) => {
-  const [isPhoneFrame, setIsPhoneFrame] = useState(true);
-  const [currentTime, setCurrentTime] = useState('09:41');
   const [soundOn, setSoundOn] = useState(true);
-
-  // Update digital clock in status bar
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      const hours = now.getHours().toString().padStart(2, '0');
-      const minutes = now.getMinutes().toString().padStart(2, '0');
-      setCurrentTime(`${hours}:${minutes}`);
-    };
-    updateTime();
-    const timer = setInterval(updateTime, 10000);
-    return () => clearInterval(timer);
-  }, []);
 
   const toggleSound = () => {
     const next = !soundOn;
@@ -43,129 +27,74 @@ export const AndroidFrame: React.FC<AndroidFrameProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#F4EFE6] flex flex-col items-center justify-start sm:p-4 text-[#1A1A1A]">
-      {/* Top Utility Control Bar */}
-      <header className="w-full max-w-xl mx-auto flex items-center justify-between px-4 py-2.5 mb-2 sm:mb-3 bg-white/80 backdrop-blur-md rounded-2xl border border-[#DDD3C2] shadow-sm">
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-xl bg-[#2D6A2F] flex items-center justify-center text-white font-ethiopic font-bold text-sm shadow-sm">
-            ፩
-          </div>
-          <div>
-            <div className="text-xs font-bold text-[#1E4A20] font-display leading-tight">
-              Ge'ez Numeral Match
+    <div className="min-h-screen w-full bg-[#FAF6EF] flex justify-center text-[#1A1A1A]">
+      {/* Responsive Container: Fluid on small phones, optimally centered with wider boundaries on tablets and desktops */}
+      <div className="w-full max-w-md sm:max-w-xl md:max-w-3xl lg:max-w-4xl min-h-screen bg-[#FDF8F2] flex flex-col justify-between shadow-xl sm:border-x sm:border-[#DDD3C2] relative transition-all">
+        {/* Sticky Top Header: responsive padding, font sizes, and button targets */}
+        <header className="sticky top-0 z-30 bg-[#2D6A2F] text-white px-3.5 sm:px-6 py-2.5 sm:py-3.5 flex items-center justify-between shadow-md shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-[#F4E4C1] text-[#2D6A2F] flex items-center justify-center font-ethiopic font-bold text-base sm:text-lg shadow-xs shrink-0 select-none">
+              ፯
             </div>
-            <div className="text-[10px] text-[#6B6459] font-mono-custom flex items-center gap-1.5">
-              <span>Ages 6–8</span>
-              <span>•</span>
-              <span className="text-[#B85C38] font-bold">Idea 7 · Android</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Global Action Icons */}
-        <div className="flex items-center gap-2">
-          {/* Streak Indicator */}
-          <div
-            className="flex items-center gap-1 bg-[#F3DCCF] border border-[#E0B49B] px-2 py-1 rounded-full text-xs font-bold text-[#B85C38]"
-            title={`${streakDays} Day Streak!`}
-          >
-            <span>🔥</span>
-            <span className="font-mono-custom">{streakDays}</span>
-          </div>
-
-          {/* Stars Tally */}
-          <div
-            className="flex items-center gap-1 bg-[#F4E4C1] border border-[#DDD3C2] px-2 py-1 rounded-full text-xs font-bold text-[#7A5A0E]"
-            title={`${starsTotal} Stars Earned!`}
-          >
-            <Award size={13} className="text-[#C8961E]" />
-            <span className="font-mono-custom">{starsTotal}</span>
-          </div>
-
-          {/* Sound Toggle */}
-          <button
-            onClick={toggleSound}
-            className="p-1.5 rounded-full hover:bg-[#E7EEE1] text-[#1E4A20] transition-colors"
-            title={soundOn ? 'Mute Audio' : 'Unmute Audio'}
-          >
-            {soundOn ? <Volume2 size={16} /> : <VolumeX size={16} className="text-[#6B6459]" />}
-          </button>
-
-          {/* Parent Mode Entry */}
-          <button
-            onClick={onOpenParentMode}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#E7EEE1] hover:bg-[#D4E2CA] text-[#1E4A20] text-xs font-semibold border border-[#DDD3C2] transition-colors"
-            title="Parent Mode & Metrics"
-          >
-            <ShieldCheck size={13} />
-            <span className="hidden sm:inline">Parent</span>
-          </button>
-
-          {/* Device Frame View Toggle */}
-          <button
-            onClick={() => setIsPhoneFrame(!isPhoneFrame)}
-            className="p-1.5 rounded-full hover:bg-[#E7EEE1] text-[#1E4A20] transition-colors"
-            title={isPhoneFrame ? 'Switch to Fullscreen Native View' : 'Switch to Android Phone Mockup'}
-          >
-            {isPhoneFrame ? <Monitor size={16} /> : <Smartphone size={16} />}
-          </button>
-        </div>
-      </header>
-
-      {/* Main Container: Android Phone Frame OR Fullscreen Native View */}
-      {isPhoneFrame ? (
-        <div className="relative w-full max-w-[390px] aspect-[9/19] max-h-[850px] min-h-[660px] bg-[#1A1A1A] rounded-[44px] p-3 shadow-2xl ring-1 ring-black/20 flex flex-col transition-all duration-300">
-          {/* Realistic Camera Punch Hole / Earpiece */}
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 flex items-center justify-center gap-1 z-30 pointer-events-none">
-            <div className="w-3.5 h-3.5 rounded-full bg-[#0D0D0D] ring-2 ring-[#2A2A2A]/80 flex items-center justify-center">
-              <div className="w-1 h-1 rounded-full bg-[#1E293B]" />
+            <div>
+              <h1 className="font-display font-bold text-sm sm:text-base md:text-lg leading-tight text-white tracking-tight">
+                Ge'ez Numeral Match
+              </h1>
+              <p className="text-[10px] sm:text-xs text-white/80 font-medium leading-none mt-0.5">
+                Ages 6–8 · Additive Math
+              </p>
             </div>
           </div>
 
-          {/* Phone Screen Display */}
-          <div className="relative w-full h-full bg-[#FDF8F2] rounded-[34px] overflow-hidden flex flex-col shadow-inner">
-            {/* Android Status Bar */}
-            <div className="h-7 w-full bg-[#2D6A2F] text-white/90 px-5 flex items-center justify-between text-[11px] font-mono-custom select-none z-20 shrink-0">
-              <span className="font-semibold tracking-tight">{currentTime}</span>
-              <div className="flex items-center gap-2">
-                {/* 5G / Wi-Fi icon simulation */}
-                <svg className="w-3.5 h-3.5 fill-current opacity-90" viewBox="0 0 24 24">
-                  <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z" />
-                </svg>
-                {/* Battery icon */}
-                <div className="flex items-center">
-                  <div className="w-4 h-2 border border-white/80 rounded-sm p-0.5 flex items-center">
-                    <div className="w-2.5 h-full bg-white rounded-2xs" />
-                  </div>
-                  <div className="w-0.5 h-1 bg-white/80 rounded-r-xs" />
-                </div>
-              </div>
+          {/* Quick Metrics & Controls */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
+            {/* Streak Indicator */}
+            <div
+              className="flex items-center gap-1 sm:gap-1.5 bg-black/20 backdrop-blur-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold text-[#FCD34D]"
+              title={`${streakDays} Day Streak!`}
+            >
+              <span className="text-xs sm:text-base">🔥</span>
+              <span className="font-mono-custom text-[11px] sm:text-xs">{streakDays}</span>
             </div>
 
-            {/* Inner App Content Scroll Area */}
-            <main className="flex-1 overflow-y-auto flex flex-col relative bg-[#FDF8F2]">
-              {children}
-            </main>
-
-            {/* Android Navigation Gesture Bar */}
-            <div className="h-5 w-full bg-[#FAF6EF] flex items-center justify-center shrink-0 border-t border-[#DDD3C2]/40 z-20">
-              <div className="w-24 h-1 bg-[#1A1A1A]/30 rounded-full" />
+            {/* Stars Tally */}
+            <div
+              className="flex items-center gap-1 sm:gap-1.5 bg-[#F4E4C1] px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold text-[#1E4A20] shadow-xs"
+              title={`${starsTotal} Stars Earned!`}
+            >
+              <Award size={14} className="text-[#C8961E]" />
+              <span className="font-mono-custom text-[11px] sm:text-xs">{starsTotal}</span>
             </div>
+
+            {/* Sound Toggle */}
+            <button
+              onClick={toggleSound}
+              className="p-1.5 sm:p-2 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 text-white transition-all cursor-pointer min-w-[34px] min-h-[34px] sm:min-w-[38px] sm:min-h-[38px] flex items-center justify-center"
+              title={soundOn ? 'Mute Audio' : 'Unmute Audio'}
+              aria-label="Toggle Sound"
+            >
+              {soundOn ? <Volume2 size={16} className="sm:w-5 sm:h-5" /> : <VolumeX size={16} className="text-white/60 sm:w-5 sm:h-5" />}
+            </button>
+
+            {/* Parent Mode Entry */}
+            <button
+              onClick={onOpenParentMode}
+              className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/15 hover:bg-white/25 active:scale-95 text-white text-xs sm:text-sm font-semibold transition-all cursor-pointer min-h-[34px] sm:min-h-[38px]"
+              title="Parent Mode & Learning Metrics"
+              aria-label="Parent Mode"
+            >
+              <ShieldCheck size={14} className="text-[#F4E4C1] sm:w-4 sm:h-4" />
+              <span className="text-[11px] sm:text-xs font-bold">Parent</span>
+            </button>
           </div>
-        </div>
-      ) : (
-        /* Native Fullscreen Container (Mobile-first responsive) */
-        <div className="w-full max-w-xl bg-[#FDF8F2] rounded-3xl border border-[#DDD3C2] shadow-xl overflow-hidden flex flex-col min-h-[680px]">
-          <main className="flex-1 overflow-y-auto flex flex-col">
-            {children}
-          </main>
-        </div>
-      )}
+        </header>
 
-      {/* Subtitle / Spec Note */}
-      <footer className="mt-3 text-center text-[11px] text-[#6B6459] font-mono-custom flex items-center gap-2">
-        <span>Additive System · No Zero · Fully Offline Bundled</span>
-      </footer>
+        {/* Inner App Content Scroll Area */}
+        <main className="flex-1 flex flex-col relative overflow-y-auto">
+          {children}
+        </main>
+      </div>
     </div>
   );
 };
+
