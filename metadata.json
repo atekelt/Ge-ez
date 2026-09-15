@@ -1,0 +1,6 @@
+{
+  "name": "Ge'ez Numeral Match",
+  "description": "Offline educational Ge'ez numeral learning app for kids ages 6-8, featuring single-digit matching, additive combination, and the zero discovery story.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
